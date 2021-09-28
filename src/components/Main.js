@@ -34,9 +34,6 @@ export default class Main extends Component {
         <Switch>
           <Route path="/BestBooks">
           <BestBooks />
-        
-            
-
           </Route>
           <Route path="/Profile">
            <Profile />
