@@ -21,15 +21,15 @@
 ## Estimates
 <!-- See below -->
 ```
-Name of feature: ________________________________
+Name of feature: Can of Books FronEndt
 
-Estimate of time needed to complete: _____
+Estimate of time needed to complete: 4 hours
 
-Start time: _____
+Start time: 14:00
 
-Finish time: _____
+Finish time: 19:30
 
-Actual time needed to complete: _____
+Actual time needed to complete: 5:30
 ```
 
 ## Credit and Collaborations
