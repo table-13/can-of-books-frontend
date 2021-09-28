@@ -39,23 +39,14 @@ async fetchBooks() {
   render() {
     return (
       <Container fluid>
-
-      
         <p>BestBooks</p>
-
         <Carousel>
-         
          {this.state.books.map((bookInfo, index) => 
-
-         
          <Carousel.Item key={index}> 
           <h1>{bookInfo.title}</h1>
-          
-            
           <h4>{bookInfo.description}</h4>
           <h4>{bookInfo.email}</h4>
           <h4>{bookInfo.status} </h4>
-          
         </Carousel.Item>
         )}
         </Carousel>
