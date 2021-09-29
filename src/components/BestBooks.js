@@ -42,14 +42,16 @@ export default class BestBooks extends Component {
     console.log(bookResponse);
     this.fetchBooks();
   };
+
   componentDidMount() {
     this.fetchBooks();
-  }
+  };
 
   handleBookDelete = async (bookInfo) => {
     console.log('getting in');
+    bookInfo =this.props.books
     console.log(bookInfo);
-    const deleteBookURL =  `http://localhost:3009/books/${bookInfo._id}/${bookInfo.email}`;
+    const deleteBookURL = `http://localhost:3009/books/${bookInfo._id}/${bookInfo.email}`;
     console.log(deleteBookURL);
     const deleteResponse = await axios.delete(
       deleteBookURL
@@ -76,6 +78,7 @@ export default class BestBooks extends Component {
   render() {
     return (
       <Container fluid>
+        
         <BookCarousel books={this.state.books} bookHandler={this.handleBookDelete}/>
         <Button variant="secondary">Create Book</Button>
         {/* <Button onClick={this.state.createBook} /> */}

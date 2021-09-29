@@ -7,8 +7,12 @@ class LoginForm extends Component {
     const userInfo = {
       email: event.target.formBasicEmail.value,
       username: event.target.formBasicUsername.value
+      
     }
-  }
+    this.props.onLogin(userInfo);
+    console.log(userInfo)
+  };
+    
   render() {
     return (
       <Form onSubmit={this.submitHandler}>
@@ -27,7 +31,7 @@ class LoginForm extends Component {
         <Button variant="primary" type="submit">
           Submit
         </Button>
-</Form>
+      </Form>
     );
   }
 };
