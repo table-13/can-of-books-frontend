@@ -18,7 +18,7 @@ export default class LoginButton extends Component {
       return <LoginForm onLogin={this.props.onLogin}/>
     }
     else{
-      return <Button onClick={this.loginclick}>Login</Button>
+      return <Button onClick={this.loginClick}>Login</Button>
     }
   }
 }
