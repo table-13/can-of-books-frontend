@@ -4,6 +4,8 @@ import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import CreateForm from "./CreateForm.js";
+import '../bestBooks.css';
+// import DeleteForm from "./DeleteForm.js";
 
 //let server = process.env.REACT_APP_API_URL;
 export default class BestBooks extends Component {
@@ -43,6 +45,19 @@ export default class BestBooks extends Component {
     this.fetchBooks();
   }
 
+  handleBookDelete = async (bookInfo) => {
+    console.log('getting in');
+    console.log(bookInfo);
+    const deleteBookURL =  `http://localhost:3009/books/${bookInfo._id}/${bookInfo.email}`;
+    console.log(deleteBookURL);
+    const deleteResponse = await axios.delete(
+      deleteBookURL
+    );
+    console.log('delete response: ' + deleteResponse);
+    this.fetchBooks();
+  };
+
+
   async fetchBooks() {
     try {
       const response = await axios.get(`http://localhost:3009/books`);
@@ -62,12 +77,13 @@ export default class BestBooks extends Component {
       <Container fluid>
         <p>BestBooks</p>
         <Carousel>
-          {this.state.books.map((bookInfo, index) => (
-            <Carousel.Item key={index}>
+          {this.state.books.map((bookInfo) => (
+            <Carousel.Item key={bookInfo._id}>
               <h1>{bookInfo.title}</h1>
               <h4>{bookInfo.description}</h4>
               <h4>{bookInfo.email}</h4>
               <h4>{bookInfo.status} </h4>
+              <button onClick={this.handleBookDelete} className={'deleteButton'} type="submit" variant="danger">Delete</button>
             </Carousel.Item>
           ))}
         </Carousel>
@@ -75,10 +91,11 @@ export default class BestBooks extends Component {
         {/* <Button onClick={this.state.createBook} /> */}
         {this.state.emptyMessage && <h1>{this.state.emptyMessage}</h1>}
         <CreateForm
-        // createBook={this.handleBookCreate}
+        createBook={this.handleBookCreate}
         // show={this.state.showModal}
         // close={this.closeModalHandler}
         />
+        
       </Container>
     );
   }
