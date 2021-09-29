@@ -5,6 +5,7 @@ import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import CreateForm from "./CreateForm.js";
 import BookCarousel from "./BookCarousel.js";
+import UpdateForm from "./UpdateForm"
 import '../bestBooks.css';
 // import DeleteForm from "./DeleteForm.js";
 
@@ -47,19 +48,29 @@ export default class BestBooks extends Component {
     this.fetchBooks();
   };
 
-  handleBookDelete = async (bookInfo) => {
-    console.log('getting in');
-    bookInfo =this.props.books
-    console.log(bookInfo);
-    const deleteBookURL = `http://localhost:3009/books/${bookInfo._id}/${bookInfo.email}`;
-    console.log(deleteBookURL);
-    const deleteResponse = await axios.delete(
-      deleteBookURL
+  handleBookUpdate = async (bookInfo) => {
+    const bookResponse = await axios.put(
+      `http://localhost:3009/books`,
+      bookInfo
     );
-    console.log('delete response: ' + deleteResponse);
+    console.log(bookResponse);
     this.fetchBooks();
   };
 
+  componentDidMount() {
+    this.fetchBooks();
+  };
+
+  handleBookDelete = async (id, email) => {
+    console.log('getting in');
+    console.log(id);
+    const deleteBookURL = `http://localhost:3009/books/${id}/${email}`;
+    console.log(deleteBookURL);
+    await axios.delete(
+      deleteBookURL
+    );
+    this.fetchBooks();
+  };
 
   async fetchBooks() {
     try {
@@ -85,6 +96,11 @@ export default class BestBooks extends Component {
         {this.state.emptyMessage && <h1>{this.state.emptyMessage}</h1>}
         <CreateForm
         createBook={this.handleBookCreate}
+        // show={this.state.showModal}
+        // close={this.closeModalHandler}
+        />
+        <UpdateForm
+        updateBook={this.handleBookUpdate}
         // show={this.state.showModal}
         // close={this.closeModalHandler}
         />
