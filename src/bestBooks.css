@@ -1,3 +1,67 @@
-.deleteButton{
+/* .deleteButton{
   margin-left: 20%;
-  }
+  } */
+
+ /* div #carousel {
+
+    background-color: aqua;
+
+    
+    
+
+  } */
+  div * {background-color: darkgray;
+ width: 800 px;
+ align-content: center;
+
+height: 1000 px;
+
+
+}
+
+div {
+  display: grid;
+  grid-row: auto;
+  grid-column: auto;
+  justify-content: auto;
+  align-content: space-around;
+  background-color: grey;
+
+}
+
+/* div.carousel.slide {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+} */
+
+div.carousel.slide * {
+
+  /* justify-self: center; */
+  justify-items: center;
+  
+
+  
+ 
+  
+  background-color: goldenrod
+}
+
+/* .div {
+  margin: auto;
+
+padding: 20px;
+}
+  
+body {
+
+  display: flex;
+  justify-content: column;
+  align-content: space-around;
+  background-color: orchid;
+  
+}
+
+carousel-indicators
+
+carousel slide */
