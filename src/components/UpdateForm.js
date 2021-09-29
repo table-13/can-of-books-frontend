@@ -1,21 +1,27 @@
 import { Component } from "react";
-
+import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 
-class DeleteForm extends Component {
+class UpdateForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    this.props.deleteBook({
-      bookInfo
-      
+    this.props.updateBook({
+      title: event.target.formName.value,
+      description: event.target.formDescription.value,
+      email: event.target.formEmail.value,
+      status: event.target.formStatus.checked,
     });
   };
   render() {
     return (
       <>
-        
+        <Modal.Dialog>
+          <Modal.Header closeButton>
+            <Modal.Title>Update Book</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Enter a Book name</Form.Label>
@@ -36,10 +42,11 @@ class DeleteForm extends Component {
                 Submit
               </Button>
             </Form>
-          
+          </Modal.Body>
+        </Modal.Dialog>
       </>
     );
   }
 }
 
-export default DeleteForm;
+export default UpdateForm;

@@ -1,18 +1,12 @@
 import { Component } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import '../bestBooks.css';
+import Button from 'react-bootstrap/Button'
 // import DeleteForm from "./DeleteForm.js";
 
 //let server = process.env.REACT_APP_API_URL;
 export default class BookCarousel extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     books: [],
-  //     emptyMessage: "",
-  //   }
-  
-  
+
   render() {
     return (
         <Carousel>
@@ -22,7 +16,8 @@ export default class BookCarousel extends Component {
               <h4>{bookInfo.description}</h4>
               <h4>{bookInfo.email}</h4>
               <h4>{bookInfo.status} </h4>
-              <button onClick={this.props.bookHandler} className={'deleteButton'} type="submit" variant="danger">Delete</button>
+              <Button onClick={() => this.props.bookHandler(bookInfo._id, bookInfo.email)} className={'deleteButton'} type="submit" variant="danger">Delete</Button>
+              <button className={'updateButton'} type="submit" variant="danger">Update</button>
             </Carousel.Item>
           ))}
         </Carousel>
