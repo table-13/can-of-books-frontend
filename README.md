@@ -13,14 +13,31 @@
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
 ## Change Log
+
 09-27-2021 15:05 - Project front-end initialized using Create React App and pushed to Github
+
 09-27-2021 19:30 - MongoDB and Book component integration
+
+09-28-2021 21:55 - Add Lab 12 functionality to front end
+
 <!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Estimates
 <!-- See below -->
+```
+Name of feature: Lab 12
+
+Estimate of time needed to complete: 4 hours
+
+Start time: 14:00
+
+Finish time: 9:45
+
+Actual time needed to complete: 7.75
+```
+
 ```
 Name of feature: Can of Books FronEnd
 
