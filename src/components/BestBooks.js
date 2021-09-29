@@ -4,6 +4,7 @@ import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 import Button from "react-bootstrap/Button";
 import CreateForm from "./CreateForm.js";
+import BookCarousel from "./BookCarousel.js";
 import '../bestBooks.css';
 // import DeleteForm from "./DeleteForm.js";
 
@@ -75,18 +76,7 @@ export default class BestBooks extends Component {
   render() {
     return (
       <Container fluid>
-        <p>BestBooks</p>
-        <Carousel>
-          {this.state.books.map((bookInfo) => (
-            <Carousel.Item key={bookInfo._id}>
-              <h1>{bookInfo.title}</h1>
-              <h4>{bookInfo.description}</h4>
-              <h4>{bookInfo.email}</h4>
-              <h4>{bookInfo.status} </h4>
-              <button onClick={this.handleBookDelete} className={'deleteButton'} type="submit" variant="danger">Delete</button>
-            </Carousel.Item>
-          ))}
-        </Carousel>
+        <BookCarousel books={this.state.books} bookHandler={this.handleBookDelete}/>
         <Button variant="secondary">Create Book</Button>
         {/* <Button onClick={this.state.createBook} /> */}
         {this.state.emptyMessage && <h1>{this.state.emptyMessage}</h1>}
