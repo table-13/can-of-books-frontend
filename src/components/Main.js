@@ -1,4 +1,3 @@
-
 import { Component } from "react";
 // import BestBooks from ".BestBooks.js";
 import BestBooks from "./BestBooks";
@@ -12,6 +11,7 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+
 
 export default class Main extends Component {
   constructor(props) {
@@ -36,7 +36,6 @@ export default class Main extends Component {
 
   render() {
     return (
-      
       <>
       <Router>
         <nav>
@@ -64,8 +63,6 @@ export default class Main extends Component {
       
      
     </>
-        
-        
     );
   }
 }
