@@ -19,9 +19,7 @@ class App extends React.Component {
   loginHandler = (user) => {
     this.setState({
       user,
-      
     });
-    
   };
 
   logoutHandler = () => {
@@ -36,18 +34,19 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-                
-                {
-                this.state.user ? (
-                  <BestBooks user={this.state.user}/>
-                ) : (
-                  <Login onLogin={this.loginHandler} />
-                )
-              }
+              {this.state.user ? (
+                <BestBooks user={this.state.user} />
+              ) : (
+                <Login onLogin={this.loginHandler} />
+              )}
             </Route>
             <Route path="/Profile">
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
-              <Profile path="Profile" />
+              <Profile
+                path="Profile"
+                text="some text"
+                curUser={this.state.user}
+              />
             </Route>
           </Switch>
           <Footer text="Authors: Anthony, Brian, Harvey" />
