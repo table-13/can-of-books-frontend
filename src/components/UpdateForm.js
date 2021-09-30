@@ -6,7 +6,6 @@ import Form from "react-bootstrap/Form";
 class UpdateForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
-
     this.props.updateBook({
       title: event.target.formName.value,
       description: event.target.formDescription.value,
@@ -33,7 +32,7 @@ class UpdateForm extends Component {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Enter email</Form.Label>
-                <Form.Control type="text" placeholder="Email: " />
+                <Form.Control type="text" placeholder={this.props.user.email} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formStatus">
                 <Form.Check label="Checked in?" type="checkbox" />
