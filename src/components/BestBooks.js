@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
 import Container from "react-bootstrap/Container";
-import Carousel from "react-bootstrap/Carousel";
+
 import Button from "react-bootstrap/Button";
 import CreateForm from "./CreateForm.js";
 import BookCarousel from "./BookCarousel.js";
@@ -16,24 +16,26 @@ export default class BestBooks extends Component {
     this.state = {
       books: [],
       emptyMessage: "",
-      // showModal: true,
+      bookInfo: null,
+      createModal: false,
+      updateModal: false
     };
   }
 
-  // openModalHandler = () => {
-  //   console.log("getting in");
+  openModalHandler = () => {
+    console.log("getting in");
+    this.setState({
+      createModal: true,
+    });
+    console.log(this.state.createModal);
+  };
 
-  //   this.setState({
-  //     showModal: true,
-  //   });
-  //   console.log(this.state.showModal);
-  // };
-
-  // closeModalHandler = () => {
-  //   this.setState({
-  //     showModal: false,
-  //   });
-  // };
+  closeModalHandler = () => {
+    this.setState({
+      createModal: false,
+    });
+  };
+  
 
   handleBookCreate = async (bookInfo) => {
     const bookResponse = await axios.post(
@@ -48,9 +50,18 @@ export default class BestBooks extends Component {
     this.fetchBooks();
   };
 
+  getBookInfo = (bookInfo) => {
+    this.setState({
+      bookInfo,
+    });
+    console.log(bookInfo);
+  }
+
   handleBookUpdate = async (bookInfo) => {
+    console.log(bookInfo);
+    console.log(this.state.bookInfo);
     const bookResponse = await axios.put(
-      `http://localhost:3009/books`,
+      `http://localhost:3009/books/${this.state.bookInfo._id}`,
       bookInfo
     );
     console.log(bookResponse);
@@ -90,17 +101,18 @@ export default class BestBooks extends Component {
     return (
       <Container fluid>
         
-        <BookCarousel books={this.state.books} bookHandler={this.handleBookDelete}/>
-        <Button variant="secondary">Create Book</Button>
-        {/* <Button onClick={this.state.createBook} /> */}
+        <BookCarousel books={this.state.books} deleteHandler={this.handleBookDelete} getBookInfo={this.getBookInfo}/>
+        <Button onClick={this.openModalHandler} close={this.closeModalHandler}variant="secondary">Create Book</Button>
+       
         {this.state.emptyMessage && <h1>{this.state.emptyMessage}</h1>}
         <CreateForm
         createBook={this.handleBookCreate}
-        // show={this.state.showModal}
+        show={this.state.createModal}
         // close={this.closeModalHandler}
         />
         <UpdateForm
         updateBook={this.handleBookUpdate}
+        bookInfo = {this.state.bookInfo}
         // show={this.state.showModal}
         // close={this.closeModalHandler}
         />

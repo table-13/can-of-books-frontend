@@ -17,7 +17,7 @@ class CreateForm extends Component {
   render() {
     return (
       <>
-        <Modal.Dialog>
+        <Modal>
           <Modal.Header closeButton>
             <Modal.Title>Create a Book</Modal.Title>
           </Modal.Header>
@@ -48,7 +48,7 @@ class CreateForm extends Component {
           <Button variant="secondary">Close</Button>
           <Button variant="primary">Save changes</Button>
         </Modal.Footer> */}
-        </Modal.Dialog>
+        </Modal>
       </>
     );
   }
