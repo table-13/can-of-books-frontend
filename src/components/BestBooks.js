@@ -7,9 +7,8 @@ import CreateForm from "./CreateForm.js";
 import BookCarousel from "./BookCarousel.js";
 import UpdateForm from "./UpdateForm";
 import "../bestBooks.css";
-// import DeleteForm from "./DeleteForm.js";
 
-//let server = process.env.REACT_APP_API_URL;
+let server = process.env.MONGODB_URI;
 export default class BestBooks extends Component {
   constructor(props) {
     super(props);
@@ -40,10 +39,8 @@ export default class BestBooks extends Component {
   };
 
   handleBookCreate = async (bookInfo) => {
-    const bookResponse = await axios.post(
-      `http://localhost:3009/books`,
-      bookInfo
-    );
+    console.log(bookInfo)
+    const bookResponse = await axios.post(`http://localhost:3009/books`,bookInfo);
     console.log(bookResponse);
     this.setState({
       createModal: false,
@@ -63,23 +60,20 @@ export default class BestBooks extends Component {
   };
 
   handleBookUpdate = async (bookInfo) => {
-    console.log(bookInfo);
-    console.log(this.state.bookInfo);
-    const bookResponse = await axios.put(
-      `http://localhost:3009/books/${this.state.bookInfo._id}`,
-      bookInfo
-    );
-    console.log(bookResponse);
+    await axios.put(`http://localhost:3009/books/${this.state.bookInfo._id}`,bookInfo);
     this.fetchBooks();
   };
 
-  handleBookDelete = async (id, email) => {
-    console.log("getting in");
-    console.log(id);
+  handleBookDelete = async (id,email) => {
     const deleteBookURL = `http://localhost:3009/books/${id}/${email}`;
     console.log(deleteBookURL);
+    if(email === this.props.user.email){
     await axios.delete(deleteBookURL);
     this.fetchBooks();
+    }
+    else{
+      alert('this book does not belong to you!')
+    }
   };
 
   async fetchBooks() {
@@ -118,12 +112,14 @@ export default class BestBooks extends Component {
           createBook={this.handleBookCreate}
           show={this.state.createModal}
           close={this.closeModalHandler}
+          user={this.props.user}
         />
         <UpdateForm
           updateBook={this.handleBookUpdate}
           bookInfo={this.state.bookInfo}
           updateModal={this.state.updateModal}
           handleModal={this.handleUpdateModal}
+          user={this.props.user}
         />
       </Container>
     );

@@ -22,7 +22,6 @@ class CreateForm extends Component {
           <Modal.Header closeButton onHide={this.props.close}>
             <Modal.Title>Create a Book</Modal.Title>
           </Modal.Header>
-
           <Modal.Body>
             <Form onSubmit={this.handleSubmit}>
               <Form.Group className="mb-3" controlId="formName">
@@ -35,7 +34,7 @@ class CreateForm extends Component {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Enter email</Form.Label>
-                <Form.Control type="text" placeholder="Email" />
+                <Form.Control type="text" placeholder={this.props.user.email} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formStatus">
                 <Form.Check label="Checked in?" type="checkbox" />

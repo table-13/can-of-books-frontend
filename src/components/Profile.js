@@ -6,7 +6,7 @@ export default class Profile extends Component {
     return (
       <Container>
         <h1>Profiles</h1>
-        <p>{this.props.text}</p>
+        <p></p>
       </Container>
     );
   }
