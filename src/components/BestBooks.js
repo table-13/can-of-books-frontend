@@ -5,8 +5,8 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import CreateForm from "./CreateForm.js";
 import BookCarousel from "./BookCarousel.js";
-import UpdateForm from "./UpdateForm"
-import '../bestBooks.css';
+import UpdateForm from "./UpdateForm";
+import "../bestBooks.css";
 // import DeleteForm from "./DeleteForm.js";
 
 //let server = process.env.REACT_APP_API_URL;
@@ -18,14 +18,14 @@ export default class BestBooks extends Component {
       emptyMessage: "",
       bookInfo: null,
       createModal: false,
-      updateModal: false
+      updateModal: false,
     };
   }
   handleUpdateModal = () => {
     this.setState({
-      updateModal: !this.state.updateModal
+      updateModal: !this.state.updateModal,
     });
-  }
+  };
   openModalHandler = () => {
     console.log("getting in");
     this.setState({
@@ -38,7 +38,6 @@ export default class BestBooks extends Component {
       createModal: false,
     });
   };
-  
 
   handleBookCreate = async (bookInfo) => {
     const bookResponse = await axios.post(
@@ -54,14 +53,14 @@ export default class BestBooks extends Component {
 
   componentDidMount() {
     this.fetchBooks();
-  };
+  }
 
   getBookInfo = (bookInfo) => {
     this.setState({
       bookInfo,
     });
     console.log(bookInfo);
-  }
+  };
 
   handleBookUpdate = async (bookInfo) => {
     console.log(bookInfo);
@@ -74,18 +73,12 @@ export default class BestBooks extends Component {
     this.fetchBooks();
   };
 
-  componentDidMount() {
-    this.fetchBooks();
-  };
-
   handleBookDelete = async (id, email) => {
-    console.log('getting in');
+    console.log("getting in");
     console.log(id);
     const deleteBookURL = `http://localhost:3009/books/${id}/${email}`;
     console.log(deleteBookURL);
-    await axios.delete(
-      deleteBookURL
-    );
+    await axios.delete(deleteBookURL);
     this.fetchBooks();
   };
 
@@ -106,23 +99,32 @@ export default class BestBooks extends Component {
   render() {
     return (
       <Container fluid>
-        
-        <BookCarousel books={this.state.books} deleteHandler={this.handleBookDelete} getBookInfo={this.getBookInfo} handleModal={this.handleUpdateModal}/>
-        <Button onClick={this.openModalHandler} close={this.closeModalHandler}variant="secondary">Create Book</Button>
-       
+        <BookCarousel
+          books={this.state.books}
+          deleteHandler={this.handleBookDelete}
+          getBookInfo={this.getBookInfo}
+          handleModal={this.handleUpdateModal}
+        />
+        <Button
+          onClick={this.openModalHandler}
+          close={this.closeModalHandler}
+          variant="secondary"
+        >
+          Create Book
+        </Button>
+
         {this.state.emptyMessage && <h1>{this.state.emptyMessage}</h1>}
         <CreateForm
-        createBook={this.handleBookCreate}
-        show={this.state.createModal}
-        close={this.closeModalHandler}
+          createBook={this.handleBookCreate}
+          show={this.state.createModal}
+          close={this.closeModalHandler}
         />
         <UpdateForm
-        updateBook={this.handleBookUpdate}
-        bookInfo = {this.state.bookInfo}
-        updateModal={this.state.updateModal}
-        handleModal={this.handleUpdateModal}
+          updateBook={this.handleBookUpdate}
+          bookInfo={this.state.bookInfo}
+          updateModal={this.state.updateModal}
+          handleModal={this.handleUpdateModal}
         />
-        
       </Container>
     );
   }

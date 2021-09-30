@@ -4,8 +4,10 @@ import Container from "react-bootstrap/Container";
 export default class Profile extends Component {
   render() {
     return (
-      <Container><h1>Profiles</h1></Container>
-      
-    )
+      <Container>
+        <h1>Profiles</h1>
+        <p>{this.props.text}</p>
+      </Container>
+    );
   }
 }

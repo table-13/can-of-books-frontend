@@ -8,6 +8,7 @@ class Header extends React.Component {
     return (
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand>Can of Books</Navbar.Brand>
+
         <NavItem>
           <Link to="/" className="nav-link">
             Home
