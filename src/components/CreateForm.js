@@ -13,12 +13,13 @@ class CreateForm extends Component {
       email: event.target.formEmail.value,
       status: event.target.formStatus.checked,
     });
+    this.props.close();
   };
   render() {
     return (
       <>
-        <Modal>
-          <Modal.Header closeButton>
+        <Modal show={this.props.show}>
+          <Modal.Header closeButton onHide={this.props.close}>
             <Modal.Title>Create a Book</Modal.Title>
           </Modal.Header>
 

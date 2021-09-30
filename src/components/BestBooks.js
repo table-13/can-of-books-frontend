@@ -21,13 +21,16 @@ export default class BestBooks extends Component {
       updateModal: false
     };
   }
-
+  handleUpdateModal = () => {
+    this.setState({
+      updateModal: !this.state.updateModal
+    });
+  }
   openModalHandler = () => {
     console.log("getting in");
     this.setState({
       createModal: true,
     });
-    console.log(this.state.createModal);
   };
 
   closeModalHandler = () => {
@@ -43,6 +46,9 @@ export default class BestBooks extends Component {
       bookInfo
     );
     console.log(bookResponse);
+    this.setState({
+      createModal: false,
+    });
     this.fetchBooks();
   };
 
@@ -101,20 +107,20 @@ export default class BestBooks extends Component {
     return (
       <Container fluid>
         
-        <BookCarousel books={this.state.books} deleteHandler={this.handleBookDelete} getBookInfo={this.getBookInfo}/>
+        <BookCarousel books={this.state.books} deleteHandler={this.handleBookDelete} getBookInfo={this.getBookInfo} handleModal={this.handleUpdateModal}/>
         <Button onClick={this.openModalHandler} close={this.closeModalHandler}variant="secondary">Create Book</Button>
        
         {this.state.emptyMessage && <h1>{this.state.emptyMessage}</h1>}
         <CreateForm
         createBook={this.handleBookCreate}
         show={this.state.createModal}
-        // close={this.closeModalHandler}
+        close={this.closeModalHandler}
         />
         <UpdateForm
         updateBook={this.handleBookUpdate}
         bookInfo = {this.state.bookInfo}
-        // show={this.state.showModal}
-        // close={this.closeModalHandler}
+        updateModal={this.state.updateModal}
+        handleModal={this.handleUpdateModal}
         />
         
       </Container>

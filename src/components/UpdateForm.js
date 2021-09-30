@@ -12,13 +12,12 @@ class UpdateForm extends Component {
       description: event.target.formDescription.value,
       email: event.target.formEmail.value,
       status: event.target.formStatus.checked,
-      
     });
   };
   render() {
     return (
       <>
-        <Modal.Dialog>
+        <Modal show={this.props.updateModal} onHide={this.props.handleModal}>
           <Modal.Header closeButton>
             <Modal.Title>Update Book</Modal.Title>
           </Modal.Header>
@@ -39,12 +38,12 @@ class UpdateForm extends Component {
               <Form.Group className="mb-3" controlId="formStatus">
                 <Form.Check label="Checked in?" type="checkbox" />
               </Form.Group>
-              <Button variant="primary" type="Submit">
+              <Button variant="primary" type="Submit" onClick={this.props.handleModal}>
                 Submit
               </Button>
             </Form>
           </Modal.Body>
-        </Modal.Dialog>
+        </Modal>
       </>
     );
   }
