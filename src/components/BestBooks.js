@@ -8,7 +8,7 @@ import BookCarousel from "./BookCarousel.js";
 import UpdateForm from "./UpdateForm";
 import "../bestBooks.css";
 
-let server = process.env.MONGODB_URI;
+let server = process.env.REACT_APP_API_URL;
 export default class BestBooks extends Component {
   constructor(props) {
     super(props);
@@ -39,8 +39,11 @@ export default class BestBooks extends Component {
   };
 
   handleBookCreate = async (bookInfo) => {
-    console.log(bookInfo)
-    const bookResponse = await axios.post(`http://localhost:3009/books`,bookInfo);
+    console.log(bookInfo);
+    const bookResponse = await axios.post(
+      `http://localhost:3009/books`,
+      bookInfo
+    );
     console.log(bookResponse);
     this.setState({
       createModal: false,
@@ -60,25 +63,24 @@ export default class BestBooks extends Component {
   };
 
   handleBookUpdate = async (bookInfo) => {
-    await axios.put(`http://localhost:3009/books/${this.state.bookInfo._id}`,bookInfo);
+    await axios.put(`${server}/books/${this.state.bookInfo._id}`, bookInfo);
     this.fetchBooks();
   };
 
-  handleBookDelete = async (id,email) => {
-    const deleteBookURL = `http://localhost:3009/books/${id}/${email}`;
+  handleBookDelete = async (id, email) => {
+    const deleteBookURL = `${server}/books/${id}/${email}`;
     console.log(deleteBookURL);
-    if(email === this.props.user.email){
-    await axios.delete(deleteBookURL);
-    this.fetchBooks();
-    }
-    else{
-      alert('this book does not belong to you!')
+    if (email === this.props.user.email) {
+      await axios.delete(deleteBookURL);
+      this.fetchBooks();
+    } else {
+      alert("this book does not belong to you!");
     }
   };
 
   async fetchBooks() {
     try {
-      const response = await axios.get(`http://localhost:3009/books`);
+      const response = await axios.get(`${server}/books`);
       const books = response.data;
       console.log(books);
       if (books.length > 0) {
