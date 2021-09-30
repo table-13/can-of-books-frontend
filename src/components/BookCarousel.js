@@ -16,8 +16,8 @@ export default class BookCarousel extends Component {
               <h4>{bookInfo.description}</h4>
               <h4>{bookInfo.email}</h4>
               <h4>{bookInfo.status} </h4>
-              <Button onClick={() => this.props.bookHandler(bookInfo._id, bookInfo.email)} className={'deleteButton'} type="submit" variant="danger">Delete</Button>
-              <button className={'updateButton'} type="submit" variant="danger">Update</button>
+              <Button onClick={() => this.props.deleteHandler(bookInfo._id, bookInfo.email)} className={'deleteButton'} type="submit" variant="danger">Delete</Button>
+              <Button onClick={() => this.props.getBookInfo(bookInfo)} className={'updateButton'} type="submit" variant="danger">Update</Button>
             </Carousel.Item>
           ))}
         </Carousel>

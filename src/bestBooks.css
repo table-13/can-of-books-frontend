@@ -1,6 +1,6 @@
-/* .deleteButton{
+.deleteButton{
   margin-left: 20%;
-  } */
+  }
 
  /* div #carousel {
 
@@ -10,7 +10,7 @@
     
 
   } */
-  div * {background-color: darkgray;
+  /* div * {background-color: darkgray;
  width: 800 px;
  align-content: center;
 
@@ -19,15 +19,17 @@ height: 1000 px;
 
 }
 
-div {
+
+
+/* div {
   display: grid;
   grid-row: auto;
   grid-column: auto;
   justify-content: auto;
-  align-content: space-around;
+  align-content: space-evenly;
   background-color: grey;
 
-}
+} */
 
 /* div.carousel.slide {
   display: flex;
@@ -35,17 +37,16 @@ div {
   flex-direction: row;
 } */
 
-div.carousel.slide * {
+ /* div.carousel.slide * {
 
-  /* justify-self: center; */
-  justify-items: center;
+  justify-content: center;
   
 
   
  
   
-  background-color: goldenrod
-}
+ 
+}  */
 
 /* .div {
   margin: auto;

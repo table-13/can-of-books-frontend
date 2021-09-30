@@ -12,6 +12,7 @@ class UpdateForm extends Component {
       description: event.target.formDescription.value,
       email: event.target.formEmail.value,
       status: event.target.formStatus.checked,
+      
     });
   };
   render() {
@@ -33,7 +34,7 @@ class UpdateForm extends Component {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Enter email</Form.Label>
-                <Form.Control type="text" placeholder="Email" />
+                <Form.Control type="text" placeholder="Email: " />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formStatus">
                 <Form.Check label="Checked in?" type="checkbox" />
