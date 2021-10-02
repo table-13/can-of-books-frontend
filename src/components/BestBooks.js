@@ -79,8 +79,15 @@ export default class BestBooks extends Component {
   };
 
   async fetchBooks() {
+    let bookAPI = `${server}/books`
+    if (this.props.user.email){
+      bookAPI += `?email=${this.props.user.email}`;
+    }
+    console.log(server)
     try {
-      const response = await axios.get(`${server}/books`);
+      console.log(server)
+      const response = await axios.get(`${bookAPI}`);
+      console.log(response)
       const books = response.data;
       console.log(books);
       if (books.length > 0) {
@@ -100,6 +107,7 @@ export default class BestBooks extends Component {
           deleteHandler={this.handleBookDelete}
           getBookInfo={this.getBookInfo}
           handleModal={this.handleUpdateModal}
+          user={this.props.user}
         />
         <Button
           onClick={this.openModalHandler}

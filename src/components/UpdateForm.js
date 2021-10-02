@@ -32,7 +32,7 @@ class UpdateForm extends Component {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Enter email</Form.Label>
-                <Form.Control type="text" placeholder={this.props.user.email} />
+                <Form.Control type="email" value={this.props.user.email} />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formStatus">
                 <Form.Check label="Checked in?" type="checkbox" />

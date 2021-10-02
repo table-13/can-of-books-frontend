@@ -41,10 +41,15 @@ class App extends React.Component {
               )}
             </Route>
             <Route path="/Profile">
+              {this.state.user ? (
               <Profile
                 path="Profile"
                 text="some text"
+                user={this.state.user}
               />
+              ) : (
+                <Login onLogin={this.loginHandler} />
+              )}
             </Route>
           </Switch>
           <Footer text="Authors: Anthony, Brian, Harvey" />
