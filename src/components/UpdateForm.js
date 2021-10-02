@@ -32,12 +32,16 @@ class UpdateForm extends Component {
               </Form.Group>
               <Form.Group className="mb-3" controlId="formEmail">
                 <Form.Label>Enter email</Form.Label>
-                <Form.Control type="text" placeholder={this.props.user.email} />
+                <Form.Control type="text" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formStatus">
                 <Form.Check label="Checked in?" type="checkbox" />
               </Form.Group>
-              <Button variant="primary" type="Submit" onClick={this.props.handleModal}>
+              <Button
+                variant="primary"
+                type="Submit"
+                onClick={this.props.handleModal}
+              >
                 Submit
               </Button>
             </Form>
