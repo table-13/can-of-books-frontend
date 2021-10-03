@@ -1,6 +1,7 @@
 import axios from "axios";
 import { Component } from "react";
 import Container from "react-bootstrap/Container";
+import { withAuth0 } from "@auth0/auth0-react";
 
 import Button from "react-bootstrap/Button";
 import CreateForm from "./CreateForm.js";
@@ -9,7 +10,7 @@ import UpdateForm from "./UpdateForm";
 import "../bestBooks.css";
 
 let server = process.env.REACT_APP_API_URL;
-export default class BestBooks extends Component {
+class BestBooks extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +19,28 @@ export default class BestBooks extends Component {
       bookInfo: null,
       createModal: false,
       updateModal: false,
+      user: null,
     };
+  }
+
+  async componentDidMount() {
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+
+      const jwt = res.__raw;
+
+      const config = {
+        headers: { Authorization: `Bearer ${jwt}` },
+        method: "get",
+        baseURL: process.env.REACT_APP_SERVER,
+        url: "/books",
+      };
+
+      const booksResponse = await axios(config);
+      this.setState({ books: booksResponse.data });
+      this.setState({ user: this.props.auth0.user });
+      console.log("USERAuth0:", this.props.auth0.user);
+    }
   }
   handleUpdateModal = () => {
     this.setState({
@@ -51,10 +73,6 @@ export default class BestBooks extends Component {
     this.fetchBooks();
   };
 
-  componentDidMount() {
-    this.fetchBooks();
-  }
-
   getBookInfo = (bookInfo) => {
     this.setState({
       bookInfo,
@@ -68,9 +86,10 @@ export default class BestBooks extends Component {
   };
 
   handleBookDelete = async (id, email) => {
+    console.log(email);
     const deleteBookURL = `${server}/books/${id}/${email}`;
     console.log(deleteBookURL);
-    if (email === this.props.user.email) {
+    if (email === this.props.auth0.user.email) {
       await axios.delete(deleteBookURL);
       this.fetchBooks();
     } else {
@@ -103,7 +122,7 @@ export default class BestBooks extends Component {
         />
         <Button
           onClick={this.openModalHandler}
-          close={this.closeModalHandler}
+          // close={this.closeModalHandler}
           variant="secondary"
         >
           Create Book
@@ -127,3 +146,4 @@ export default class BestBooks extends Component {
     );
   }
 }
+export default withAuth0(BestBooks);

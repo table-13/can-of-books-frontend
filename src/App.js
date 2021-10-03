@@ -1,10 +1,13 @@
 import React from "react";
+import { withAuth0 } from "@auth0/auth0-react";
 
 import Header from "./components/Header.js";
 import Footer from "./components/Footer.js";
 import Profile from "./components/Profile";
 import BestBooks from "./components/BestBooks";
-import Login from "./components/Login";
+// import Login from "./components/Login";
+import LoginButton from "./components/LoginButton";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -14,6 +17,12 @@ class App extends React.Component {
     this.state = {
       user: null,
     };
+  }
+  async componentDidMount() {
+    if (this.props.auth0.isAutheticated) {
+      console.log("COMPONENTDIDMOUNT");
+      this.setState({ user: this.props.auth0.user });
+    }
   }
 
   loginHandler = (user) => {
@@ -34,17 +43,13 @@ class App extends React.Component {
           <Header user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-              {this.state.user ? (
+              <LoginButton />
+              {this.props.auth0.isAuthenticated && (
                 <BestBooks user={this.state.user} />
-              ) : (
-                <Login onLogin={this.loginHandler} />
               )}
             </Route>
             <Route path="/Profile">
-              <Profile
-                path="Profile"
-                text="some text"
-              />
+              <Profile path="Profile" text="some text" />
             </Route>
           </Switch>
           <Footer text="Authors: Anthony, Brian, Harvey" />
@@ -53,4 +58,4 @@ class App extends React.Component {
     );
   }
 }
-export default App;
+export default withAuth0(App);
