@@ -88,9 +88,10 @@ class BestBooks extends Component {
   };
 
   handleBookDelete = async (id, email) => {
+    console.log(email);
     const deleteBookURL = `${server}/books/${id}/${email}`;
     console.log(deleteBookURL);
-    if (email === this.props.user.email) {
+    if (email === this.props.auth0.user.email) {
       await axios.delete(deleteBookURL);
       this.fetchBooks();
     } else {
