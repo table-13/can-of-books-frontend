@@ -18,8 +18,9 @@ class App extends React.Component {
       user: null,
     };
   }
-  async componentDidUpdate() {
+  async componentDidMount() {
     if (this.props.auth0.isAutheticated) {
+      console.log("COMPONENTDIDMOUNT");
       this.setState({ user: this.props.auth0.user });
     }
   }
@@ -36,7 +37,6 @@ class App extends React.Component {
     });
   };
   render() {
-    console.log(this.state.user);
     return (
       <>
         <Router>

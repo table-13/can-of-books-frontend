@@ -37,10 +37,8 @@ class BestBooks extends Component {
       };
 
       const booksResponse = await axios(config);
-      console.log(booksResponse);
-      const { user } = withAuth0();
       this.setState({ books: booksResponse.data });
-      this.setState({ user });
+      this.setState({ user: this.props.auth0.user });
       console.log("USERAuth0:", this.props.auth0.user);
     }
   }
