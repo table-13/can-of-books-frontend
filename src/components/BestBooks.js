@@ -19,6 +19,7 @@ class BestBooks extends Component {
       bookInfo: null,
       createModal: false,
       updateModal: false,
+      user: null,
     };
   }
 
@@ -36,8 +37,11 @@ class BestBooks extends Component {
       };
 
       const booksResponse = await axios(config);
-
+      console.log(booksResponse);
+      const { user } = withAuth0();
       this.setState({ books: booksResponse.data });
+      this.setState({ user });
+      console.log("USERAuth0:", this.props.auth0.user);
     }
   }
   handleUpdateModal = () => {
@@ -119,7 +123,7 @@ class BestBooks extends Component {
         />
         <Button
           onClick={this.openModalHandler}
-          close={this.closeModalHandler}
+          // close={this.closeModalHandler}
           variant="secondary"
         >
           Create Book

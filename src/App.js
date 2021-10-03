@@ -18,6 +18,11 @@ class App extends React.Component {
       user: null,
     };
   }
+  async componentDidUpdate() {
+    if (this.props.auth0.isAutheticated) {
+      this.setState({ user: this.props.auth0.user });
+    }
+  }
 
   loginHandler = (user) => {
     this.setState({
@@ -31,6 +36,7 @@ class App extends React.Component {
     });
   };
   render() {
+    console.log(this.state.user);
     return (
       <>
         <Router>
